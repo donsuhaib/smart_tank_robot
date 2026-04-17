@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Tank Robot Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Smart Tank Robot</h1>
+    <div id="connection-pill" class="pill pill-off">ESP32-CAM: offline</div>
+  </header>
+
+  <main>
+    <!-- LIVE FEED -->
+    <section class="video-panel">
+      <img id="video-stream"
+           src="{{ url_for('video') }}"
+           alt="Annotated live camera feed" />
+    </section>
+
+    <!-- STATUS CARDS -->
+    <section class="cards">
+      <div class="card">
+        <h3>Robot State</h3>
+        <div class="big" id="state-value">&mdash;</div>
+      </div>
+
+      <div class="card">
+        <h3>Autonomous</h3>
+        <div class="big" id="auto-value">OFF</div>
+      </div>
+
+      <div class="card">
+        <h3>Line Position</h3>
+        <div class="big" id="line-value">lost</div>
+        <div class="small">conf: <span id="line-conf">0.00</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Ultrasonic (cm)</h3>
+        <div class="row">
+          <div>L: <span id="us-left">&ndash;</span></div>
+          <div>C: <span id="us-center">&ndash;</span></div>
+          <div>R: <span id="us-right">&ndash;</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Detected Object</h3>
+        <div class="big" id="obj-name">none</div>
+        <div class="small">conf: <span id="obj-conf">0.00</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Object Distance</h3>
+        <div class="big"><span id="obj-dist">&ndash;</span> cm</div>
+        <div class="small">(camera estimate)</div>
+      </div>
+
+      <div class="card">
+        <h3>FPS</h3>
+        <div class="big" id="fps-value">0</div>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <section class="controls">
+      <div class="dpad">
+        <button class="btn up"     data-cmd="forward">&#9650;</button>
+        <button class="btn left"   data-cmd="left">&#9664;</button>
+        <button class="btn stop"   data-cmd="stop">&#9632;</button>
+        <button class="btn right"  data-cmd="right">&#9654;</button>
+        <button class="btn down"   data-cmd="backward">&#9660;</button>
+      </div>
+
+      <div class="auto-controls">
+        <button id="auto-on-btn"  class="btn auto-on"  data-cmd="auto_on">Start Autonomous</button>
+        <button id="auto-off-btn" class="btn auto-off" data-cmd="auto_off">Stop Autonomous</button>
+      </div>
+
+      <div class="servo-controls">
+        <label for="servo-range">Servo angle: <span id="servo-value">90</span>&deg;</label>
+        <input id="servo-range" type="range" min="0" max="180" value="90" />
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

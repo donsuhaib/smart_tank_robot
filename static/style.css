@@ -1,0 +1,171 @@
+:root {
+  --bg: #0f1218;
+  --panel: #1b2130;
+  --panel2: #242c3d;
+  --text: #e6ecf5;
+  --muted: #8a94a8;
+  --accent: #28c76f;
+  --danger: #ff5c5c;
+  --warning: #ffb84d;
+  --border: #2d3548;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+.pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.pill-on  { background: rgba(40, 199, 111, 0.15); color: var(--accent); }
+.pill-off { background: rgba(255, 92, 92, 0.15); color: var(--danger); }
+
+main {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: minmax(480px, 1fr) 380px;
+  grid-template-areas:
+    "video cards"
+    "controls cards";
+  gap: 20px;
+}
+
+.video-panel {
+  grid-area: video;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-panel img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.cards {
+  grid-area: cards;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-content: start;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+.card h3 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.card .big {
+  font-size: 22px;
+  font-weight: 700;
+}
+.card .small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.card .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.controls {
+  grid-area: controls;
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  background: var(--panel);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 6px;
+}
+
+.dpad .up    { grid-column: 2; grid-row: 1; }
+.dpad .left  { grid-column: 1; grid-row: 2; }
+.dpad .stop  { grid-column: 2; grid-row: 2; background: var(--danger); }
+.dpad .right { grid-column: 3; grid-row: 2; }
+.dpad .down  { grid-column: 2; grid-row: 3; }
+
+.btn {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: transform 0.05s ease, background 0.15s ease;
+}
+.btn:hover    { background: #2e3750; }
+.btn:active   { transform: scale(0.96); }
+
+.auto-controls {
+  display: flex;
+  gap: 10px;
+}
+.btn.auto-on  { background: var(--accent); }
+.btn.auto-off { background: var(--warning); color: #222; }
+
+.servo-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+}
+.servo-controls input[type=range] { width: 100%; }
+
+@media (max-width: 1000px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "video"
+      "cards"
+      "controls";
+  }
+}
